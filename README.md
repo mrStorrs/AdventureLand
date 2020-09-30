@@ -1,6 +1,6 @@
 ## Adventure Land - The Code MMORPG - Scripts
 
-# Description:
+### Description:
 Adventure Land is a game where you can completly automate every aspect of the gameplay.
 Every single thing that can be done manually can be automated. You can choose to play with
 manual controls, completly automated (through handwritten scripts) or a combination of both.
