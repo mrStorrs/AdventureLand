@@ -1,35 +1,66 @@
-/*
-    This is a work in progress. It will become the main script that all characters run.
-        -Everything will be state depended (moving, attacking, upgrading, etc..)
-        -Will have config for all the 4 characters you can run at one time
-        -This will include options for choosing Main Tank / Pulling
-        -Will have skill sets depending on what class the character is at
-        -This particular file will not run an interval. The code blocks that the
-            character loads will be what contains the intervals.
-*/
-/////////////////////////////////////////////////////
-///////Enter your character names here.
-////////////////////////////////////////////////////
-figher_1    = "MoyaTesh";
-fighter_2  = "Boomybob";
-fighter_3   = "SliceNdice";
-merchant    = "NickyNickel";
+/* ----------------------------------------------------------------
+ * WORK IN PROGRESS!
+ * This will become the main script that all characters run. I am creating this
+ * because it will be much easier to run all characters off one single script
+ * instead of havig to switch between each character and changing their
+ * individual scripts.
+ * 
+ * When completed:
+ *  + Everything will be state depended (moving, attacking, upgrading, etc..)
+ *  + Will have config for all the 4 characters you can run at one time
+ *  + This will include options for choosing Main Tank / Pulling
+ *  + Will have skill sets depending on what class the character is
+ *  + This particular file will not run an interval. The code blocks that the
+ *      character loads will be what contains the intervals.
+ * --------------------------------------------------------------*/
 
-/////////////////////////////////////////////////////
-///////Choose Character Options here////////////////
-////////////////////////////////////////////////////
+//Fighter objects
+function Fighter(name){
+    this.name = name;
+    this.is_kiteing = false;
+    this.is_pvp = false; 
+    this.activities = ["Fight", "SendItems"]
+    this.is_tank = false;
+}
 
-//fighter_1/////////////////////////////////////////
-fighter_1.is_tank = false;
-fighter_1.will_kite = false;
+//array creating and holding all fighter objects.
+all_fighters = [
+    fighter_1 = new Fighter("MoyaTesh"),
+    fighter_2 = new Fighter("Boomybob"),
+    fighter_3 = new Fighter("SliceNdice")
+]
 
-//fighter_2/////////////////////////////////////////
-fighter_2.is_tank = false;
-fighter_2.will_kite = false;
+/* ----------------------------------------------------------------
+ *Modify your fighters to do differant things here. You may change
+ * whether they are tank, range, what activities they have, what order
+ * those activities come in, and anything else here 
+ * --------------------------------------------------------------*/
+//fighter_1 --  "MoyaTesh"
 
-//fighter_3/////////////////////////////////////////
-fighter_3.is_tank= false;
-fighter_2.will_kite = false;
+//fighter_2 --  "Boomybob"
+
+//fighter_3 --  "SliceNdice"
+
+/* ----------------------------------------------------------------
+ * Configure your merchant here.
+ * --------------------------------------------------------------*/
+merchant = {
+    name : "NickyNickel",
+    activities : ["Upgrade", "Compound", "FetchItems", "LuckBuff"]
+}
+
+/* ----------------------------------------------------------------
+ * Logic for fighters deciding which scripts to load goes here.
+ * --------------------------------------------------------------*/
+//find the currently loaded fighter
+for(fighter of all_fighters){
+    if (character.name == all_fighters[i].name){
+        fighter = all_fighters[i];
+    }
+}
+//load scripts
+for(activity of fighter.activities){
+    load_code(activity);
+}
 
 
-//merchant//////////////////////////////////////////
