@@ -14,6 +14,8 @@
  *      character loads will be what contains the intervals.
  * --------------------------------------------------------------*/
 
+var player; //used to hold the current characters object information
+
 //Fighter objects
 function Fighter(name) {
     this.name = name;
@@ -66,16 +68,27 @@ merchant = {
 /* ----------------------------------------------------------------
  * Logic for fighters deciding which scripts to load goes here.
  * --------------------------------------------------------------*/
-//find the currently loaded fighter
-for (current_fighter of all_fighters) {
-    if (character.name == current_fighter.name) {
-        fighter = current_fighter;
-        game_log("Fighter:" + fighter.name + " is ready for battle!")
+//find the currently loaded character/player
+if (character.name == merchant.name){
+    player = merchant;
+    game_log("Merchant:" + player.name + " is ready for merchanting!")
+} else {
+    for (current_fighter of all_fighters) {
+        if (character.name == current_fighter.name) {
+            player = current_fighter;
+            game_log("Fighter:" + player.name + " is ready for battle!")
+        }
     }
 }
+
 //load scripts
-for (activity of fighter.activities) {
+for (activity of player.activities) {
     load_code(activity);
+}
+
+//get player info (used inside other scripts)
+function get_player(){
+    return player;
 }
 
 
