@@ -26,12 +26,12 @@ function Fighter(name) {
      *   "scared"    = will switch server on sight.
      *   "bravish"   = will switch server when attacked. */
     this.pvp =
-    //scripts to load.
-    this.activities = ["Fight", "SendItems"]
+        //scripts to load.
+        this.activities = ["Combat", "SendItems", "goldmeter"]
     //this will set the fighter to try to grab aggro or pull targets.
     this.is_tank = false;
     //mobs to farm go here. order is priority.
-    this.mobs_to_farm = ["arcticbee"]        
+    this.mobs_to_farm = ["arcticbee"]
 }
 
 //array creating and holding all fighter objects.
@@ -51,11 +51,6 @@ all_fighters = [
 //fighter_2 --  "Boomybob"
 
 //fighter_3 --  "SliceNdice"
-fighter_3.activities = [
-    "TESTING",
-    "goldmeter",
-    "SendItems"
-]
 
 /* ----------------------------------------------------------------
  * Configure your merchant here.
@@ -69,7 +64,7 @@ merchant = {
  * Logic for fighters deciding which scripts to load goes here.
  * --------------------------------------------------------------*/
 //find the currently loaded character/player
-if (character.name == merchant.name){
+if (character.name == merchant.name) {
     player = merchant;
     game_log("Merchant:" + player.name + " is ready for merchanting!")
 } else {
@@ -87,8 +82,14 @@ for (activity of player.activities) {
 }
 
 //get player info (used inside other scripts)
-function get_player(){
+function get_player() {
     return player;
 }
 
-
+function get_player_names() {
+    player_names = {
+        fighters: [fighter_1.name, fighter_2.name, fighter_3.name],
+        merchant: merchant.name
+    }
+    return player_names
+}

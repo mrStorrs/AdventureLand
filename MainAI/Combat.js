@@ -1,4 +1,3 @@
-
 //load_code("goldmeter");
 //load_code("SendItems");
 
@@ -6,6 +5,9 @@ var attack_mode = true
 
 //get the player obj from config script
 player = get_player();
+
+//get merchant name
+merchant = get_player_names().merchant
 
 //set targets to farm
 var mobs_to_farm = player.mobs_to_farm;
@@ -56,10 +58,10 @@ setInterval(function () {
 
     if (!attack_mode || character.rip || is_moving(character)) return;
 
-/* ----------------------------------------------------------------
- * Check inventory for potions and then buy more if needed. 
- * Will eventually be moving this to it's own script.
- * --------------------------------------------------------------*/
+    /* ----------------------------------------------------------------
+     * Check inventory for potions and then buy more if needed. 
+     * Will eventually be moving this to it's own script.
+     * --------------------------------------------------------------*/
 
     //check item quantaty in inventory
     function numItems(item) {
@@ -102,14 +104,14 @@ setInterval(function () {
         }
     }
 
-/* ----------------------------------------------------------------
- * Targeting Logic. 
- * 
- * @todo: change pvp logic (change server etc.) to be dependent on
- *        player obj information.
- * @todo: fix target checking to loop through array of targets,
- *        prioritizing by index.
- * --------------------------------------------------------------*/
+    /* ----------------------------------------------------------------
+     * Targeting Logic. 
+     * 
+     * @todo: change pvp logic (change server etc.) to be dependent on
+     *        player obj information.
+     * @todo: fix target checking to loop through array of targets,
+     *        prioritizing by index.
+     * --------------------------------------------------------------*/
     //function for finding neaerest target
     function find_target() {
         //filter for monster
@@ -117,7 +119,7 @@ setInterval(function () {
             //check if on a pvp server
             if (get_socket()["io"]["engine"]["hostname"] == "uspvp.adventure.land"
                 || get_socket()["io"]["engine"]["hostname"] == "eupvp.adventure.land"
-            ){
+            ) {
                 //if any targets are a player character (non NPC) and is not 
                 //friendly change server.
                 if (monster.citizen == undefined
@@ -130,6 +132,12 @@ setInterval(function () {
                     game_log('enemy found: ' + monster.name);
                 }
             }
+
+            //check if monster is actually our merchant
+            if (monster.name == merchant) {
+                send_items(monster);
+            }
+
             //target first monster in array (changing later)
             if (monster.mtype == mobs_to_farm[0]
                 //&& get_target_of(get_entity("Boomybob")) != monster
@@ -178,7 +186,7 @@ setInterval(function () {
         return Math.sqrt(Math.pow(character.real_x - x, 2)
             + Math.pow(character.real_y - y, 2));
     }
-		
+
     var target = get_targeted_monster();
     if (!target) {
         target = find_target()[0];
@@ -198,9 +206,9 @@ setInterval(function () {
             return;
         }
     }
-/* ----------------------------------------------------------------
- * Movement
- * --------------------------------------------------------------*/
+    /* ----------------------------------------------------------------
+     * Movement
+     * --------------------------------------------------------------*/
     //used to move towareds target
     function move_to_target(target) {
         if (can_move_to(target.real_x, target.real_y)) {
@@ -217,9 +225,9 @@ setInterval(function () {
         }
     }
 
-/* ----------------------------------------------------------------
- * Combat / attack
- * --------------------------------------------------------------*/
+    /* ----------------------------------------------------------------
+     * Combat / attack
+     * --------------------------------------------------------------*/
     //check if in range then attack.
     if (!is_in_range(target)) {
         move_to_target(target);
