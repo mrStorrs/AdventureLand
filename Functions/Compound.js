@@ -19,6 +19,12 @@ function compound_items(index1, index2, index3, rarity) {
     return null;
 }
 
+/* ----------------------------------------------------------------
+ * @todo -  move item check/ search to main "Merchant" script and only
+ *          leave the actual functions to do the combining/upgrading here
+ * @todo -  modify the scripts to be state dependendent so that it is not 
+ *          just spamming upgrade/compound. 
+ * --------------------------------------------------------------*/
 setInterval(function () {
     items = character.items //set items (easier to type)
 

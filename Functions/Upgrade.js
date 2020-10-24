@@ -1,4 +1,10 @@
-//run compound script @ same time as upgrade. 
+
+/* ----------------------------------------------------------------
+ * @todo -  move item check/ search to main "Merchant" script and only
+ *          leave the actual functions to do the combining/upgrading here
+ * @todo -  modify the scripts to be state dependendent so that it is not 
+ *          just spamming upgrade/compound. 
+ * --------------------------------------------------------------*/
 load_code("Compound");
 
 //enter the items and desired level here, and rarity

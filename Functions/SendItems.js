@@ -1,9 +1,14 @@
+/* ----------------------------------------------------------------
+ * This script is used by the fighters to send items in their inventory
+ * to the merchant.
+ * --------------------------------------------------------------*/
 var merchant_name; //will be set in send_items function
 var slot_to_start = 2;
 
+
 function send_items(merchant) {
     merchant_name = merchant.name;
-
+    //check if sufficent items in invtory to send to merchant, and if the merch is close
     if (distance(character, merchant) < 500) {
         game_log("merchant in range");
         if (character.esize < 36) {

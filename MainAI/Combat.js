@@ -40,6 +40,9 @@ send_party_request('MoyaTesh');
 
 /* ----------------------------------------------------------------
  * Main combat interval
+ * @todo -  move healing logic to the utilities functions holder
+ *          also improve upon that function so that it can choose
+ *          whether to use regen or potion use.
  * --------------------------------------------------------------*/
 setInterval(function () {
 
@@ -209,7 +212,7 @@ setInterval(function () {
     /* ----------------------------------------------------------------
      * Movement
      * --------------------------------------------------------------*/
-    //used to move towareds target
+    //used to move towards target
     function move_to_target(target) {
         if (can_move_to(target.real_x, target.real_y)) {
             smart.moving = false;
