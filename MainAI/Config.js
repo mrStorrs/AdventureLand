@@ -57,15 +57,21 @@ all_fighters = [
  * --------------------------------------------------------------*/
 merchant = {
     name: "NickyNickel",
-    activities: ["Merchant", "Upgrade"],
+    activities: ["Merchant2", "UpgradeTest", "CompoundTest"],
     //Items to upgrade go here. 1st param is desired level. 2nd is rarity
-    upgrade_items: {
-        'wshoes': [6, 1],
-        'wcap': [6, 1],
-        'cclaw': [5, 1],
-        'wgloves': [5, 1],
-        'wbreeches': [5, 1],
-        'mushroomstaff': [5, 1],
+    items_to_upgrade: {
+        'wshoes': [8, 2],
+        'wcap': [8, 2],
+        'cclaw': [8, 2],
+        'wgloves': [8, 2],
+        'wbreeches': [8, 2],
+        'mushroomstaff': [9, 2],
+        'wattire': [8, 2],
+        'frostbow': [6, 3],
+        'phelmet': [5, 3],
+        'gphelmet': [5, 3],
+        'blade': [7, 1],
+
     }
 }
 

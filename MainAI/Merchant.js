@@ -4,40 +4,36 @@
 
 //get the merchant object from config script
 merchant = get_player();
-items_to_upgrade = merchant_name.items_to_upgrade;
 
+//set items to compound and upgrade.
+items_to_upgrade = merchant.items_to_upgrade;
+items_to_compound = merchant.items_to_compound;
 
+//set keyboard snippet shortcuts
+parent.keymap["4"].code = "smart_move('arcticbee')"
+parent.keymap["5"].code = "change_server('EU', 'PVP')"
+parent.keymap["6"].code = "change_server('US', 'III')"
+
+//main interval
 setInterval(function () {
-    items = character.items //set items (easier to type)
 
-    //check if need basic scrolls
-    if (character.items[0].q < 10) {
-        buy('scroll0', 100);
+    //check if need to heal!
+    if (character.hp < character.max_hp - 100) {
+        use('regen_hp');
+    }
+    //curently set to use the skill, not potions
+    if (character.mp < character.max_mp - 100) {
+        use('regen_mp');
     }
 
-    //check if any items in inventory need upgrading
-    //starts at 1 because I keep scrolls from 0-1. change as needed.
-    for (i = 1; i < items.length; i++) {
-
-        if (items[i] != null) { //check if item present in inv slot.
-            //check if needs to be upgraded.
-            if (items[i].name in items_to_upgrade &&
-                items_to_upgrade[items[i].name][0] > items[i].level) {
-                set_message("upgrading");
-
-                //call upgrade item function
-                upgrade_item(i, items[i].level,
-                    items_to_upgrade[items[i].name][1]); //upgrade
-
-                break; //end  when item found
-            } 
-            
-            /* this will sell trash items. removing for now.
-            else if (items[i].name in sell_item
-                && sell_item[items[i].name] == items[i].level) {
-                sell(i, 1);
-            }
-            */
+    if (!smart.moving && !smart.pathing) {
+        set_message("Bored!");
+        if (character.q.upgrade == undefined) {
+            go_upgrade();
+        }
+        if (character.q.compound == undefined) {
+            go_compound();
         }
     }
-}, 1000 / 4); // Loops every 4x every second
+
+}, 1000);
