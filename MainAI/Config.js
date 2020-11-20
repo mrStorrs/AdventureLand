@@ -71,7 +71,16 @@ merchant = {
         'phelmet': [5, 3],
         'gphelmet': [5, 3],
         'blade': [7, 1],
-
+    },
+    items_to_compound: {
+        'ringsj': [3, 1],
+        'intamulet': [3, 1],
+        'stramulet': [4, 1],
+        'dexamulet': [3, 1],
+        'intring': [3, 1],
+        'dexring': [3, 1],
+        'strring': [3, 1],
+        'vitring': [3, 1],
     }
 }
 
@@ -107,4 +116,8 @@ function get_player_names() {
         merchant: merchant.name
     }
     return player_names
+}
+
+function get_mob() {
+    return fighter_1.mobs_to_farm[0]
 }
